@@ -1,0 +1,59 @@
+What we are looking for: functionality, efficiency, readability and tests.
+
+Use this test to demonstrate your understanding of OO and TDD.
+
+Write a ruby script that:
+
+a. Receives a log as argument (webserver.log is provided)
+
+e.g.: ./parser.rb data/webserver.log
+
+b. Returns the following:
+
+> list of webpages with most page views ordered from most pages views to less page views
+
+     e.g.:
+
+         /home 90 visits
+
+         /index 80 visits
+
+         etc...
+
+> list of webpages with most unique page views also ordered
+
+     e.g.:
+
+         /about/2   8 unique views
+
+         /index     5 unique views
+
+         etc...
+
+Tests are setup to use minitest and can be added to the `test` directory. To run use `rake test`. The log file to use in testing can be found in the `data` directory.
+
+We primarily use minitest in our test suites, but feel free to use a testing framework with which you are comfortable with.
+
+---
+
+## Log Parser Soltion
+
+# Use of Set
+
+The log_parser.rb script uses the Set class to calculate unique page views. A Set is a collection of unordered, unique elements. The primary reason for using a Set in this script is its ability to handle element uniqueness automatically, making it easy to count unique IP addresses for each page. <br />
+
+By storing IP addresses in a Set for each webpage, we ensure that duplicate IP addresses are not counted more than once, allowing us to accurately calculate unique page views. This makes the implementation of the unique_page_views method more concise and easier to understand, as the Set class takes care of element uniqueness, without the need for additional logic to handle duplicates. <br />
+
+If an alternative data structure like Hash or Array were used instead, additional logic would be required to handle duplicate IP addresses and ensure accurate unique page view counts.
+
+# Adapting Tests for Flexibility
+
+During the development process, it became apparent that using the actual results from the data/webserver.log file as expected test results might not always be feasible or suitable for different scenarios. In order to enhance the testing flexibility and accommodate various use cases, the need for tests that could work independently of the log file's specific content arose. <br />
+
+To address this concern, the test suite was adapted to include tests that are not reliant on the original log file's data. By providing hardcoded log data strings directly in the test file, the tests can now verify the functionality of the LogParser class without depending on the data/webserver.log file. This approach allows for greater control over the test data, making it possible to create various test cases with diverse log data to ensure the robustness and correctness of the LogParser implementation. <br />
+
+However, to further enhance the test coverage and ensure that the LogParser class is capable of correctly parsing the provided data/webserver.log file, an additional test was introduced. This test focuses on verifying that the parser can successfully read and process the log file, which is an essential aspect of the script's functionality. <br />
+
+The test checks whether the LogParser class, when initialized with the data/webserver.log file path, is able to read the file, parse its content into log entries, and store them internally as instances of the LogEntry class. By examining the internal log entries, the test validates that the parser can effectively process the log file and extract the required information, such as the page path and the IP address. This test helps to ensure that the parser is not only able to work with hardcoded log data strings but also with actual log files, making it more versatile and reliable in various use cases. <br />
+
+The tests also cater for other cases that may occur outside the scope of the challenge for example if the path to the log file is incorrect, if the log file is empty, or if one/many of the entries are missing a field.
