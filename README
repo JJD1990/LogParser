@@ -38,6 +38,8 @@ We primarily use minitest in our test suites, but feel free to use a testing fra
 
 ## Log Parser Soltion
 
+Must run `chmod +x parser.rb` to make the script executable
+
 # Use of Set
 
 The log_parser.rb script uses the Set class to calculate unique page views. A Set is a collection of unordered, unique elements. The primary reason for using a Set in this script is its ability to handle element uniqueness automatically, making it easy to count unique IP addresses for each page. <br />
